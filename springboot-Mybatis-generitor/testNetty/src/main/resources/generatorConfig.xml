@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+    <properties resource="generatorConfig.properties"/>
+
+    <context id="ssm" targetRuntime="MyBatis3">
+         <!--  解决自动生成的mapper.xml追加导致程序启动报错，不加这句的话每次自动生成实体必须手动删除所有的mapper.xml文件之后重新生成 -->
+        <property name="mergeable" value="false"/>
+
+		<commentGenerator>
+			<!-- 是否去除自动生成的注释 true：是 ： false:否 -->
+			<property name="suppressAllComments" value="false" />
+		</commentGenerator>
+        <!--
+        <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver" connectionURL="jdbc:oracle:thin:@10.100.1.20:1521:db1"
+          userId="rams_test" password="bangsun">
+        </jdbcConnection>
+        -->
+        <jdbcConnection driverClass="${driver}"
+                        connectionURL="${url}" userId="${username}" password="${password}">
+        </jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false" />
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.hsj.testNetty.testNetty.pojo" targetProject="src/main/java">
+			<!-- enableSubPackages:是否让schema作为包的后缀 -->
+			<property name="enableSubPackages" value="true" />
+			<!-- 从数据库返回的值被清理前后的空格 -->
+			<property name="trimStrings" value="true" />
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.hsj.testNetty.testNetty.map" targetProject="src/main/resources">
+			<property name="enableSubPackages" value="false" />
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.hsj.testNetty.testNetty.mapper"
+                             targetProject="src/main/java">
+			<property name="enableSubPackages" value="true" />
+        </javaClientGenerator>
+        
+        <table tableName="user" domainObjectName="User"></table>
+        <table tableName="usertemp" domainObjectName="UserTemp"></table>
+
+    </context>
+</generatorConfiguration>
